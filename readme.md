@@ -12,4 +12,4 @@ Install now following:
 3. Enjoy ;p.
 ___
 ## Some Experiences:  
-* [Different ways to make a query on mongoDB on C#](https://github.com/nathancaracho/tower-of-windsock/blob/master/MongoDbQueries.ipynb)
+* [Different ways to make a query on mongoDB on C#](https://github.com/nathancaracho/tower-of-windsock/blob/master/MongoDbQueries.ipynb) **WIP**

@@ -9,7 +9,7 @@ Install now following:
 ## How to use? 
 1. Read this [.NET Interactive Preview 3](https://devblogs.microsoft.com/dotnet/net-interactive-preview-3-vs-code-insiders-and-polyglot-notebooks/).
 2. Clone this repository.
-3. Enjoy ;p.
+3. Enjoy :smiley:
 ___
 ## Some Experiences:  
-* [Different ways to make a query on mongoDB on C#](https://github.com/nathancaracho/tower-of-windsock/blob/master/MongoDbQueries.ipynb) **WIP**
+* [Different ways to make a query on mongoDB on C#](https://github.com/nathancaracho/tower-of-windsock/blob/master/MongoDbQueries.ipynb) :wrench: **WIP**

@@ -1,0 +1,11 @@
+version: "3.5"
+services:
+  local-notebooks:
+    container_name: local-notebooks
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    volumes:
+      - ./experiences:/notebooks
+    ports:
+      - "8888:8888" 

@@ -3,9 +3,10 @@ services:
   local-notebooks:
     container_name: local-notebooks
     build:
-      context: .
-      dockerfile: Dockerfile.local
+      context: ./jupyter-lab-setup
+      dockerfile: Dockerfile
     volumes:
       - ./experiences:/notebooks
+      - ./jupyter-lab-setup/settings:/usr/local/share/jupyter/lab/settings
     ports:
       - "8888:8888" 

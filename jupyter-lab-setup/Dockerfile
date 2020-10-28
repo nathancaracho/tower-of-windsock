@@ -29,6 +29,12 @@ RUN python3 -m pip install setuptools
 RUN python3 -m pip install jupyter
 RUN python3 -m pip install jupyterlab
 
+# Dowloading extentions start
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+RUN sudo apt-get install nodejs
+RUN jupyter labextension install @aquirdturtle/collapsible_headings
+# Dowloading extentions end
+
 # Install lastest build from master branch of Microsoft.DotNet.Interactive from myget
 RUN dotnet tool install --tool-path /usr/share/dotnet-interactive Microsoft.dotnet-interactive --add-source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
 RUN ln -s /usr/share/dotnet-interactive/dotnet-interactive /usr/bin/dotnet-interactive

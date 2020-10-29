@@ -1,17 +1,18 @@
 # The Tower of Windsock
-___
-## What is this? 
-Here when I will make my ☣ experiences using a Microsoft [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) solution [.NET Interactive Preview 3](https://devblogs.microsoft.com/dotnet/net-interactive-preview-3-vs-code-insiders-and-polyglot-notebooks/).  
-This is a Polyglot Notebooks solution like [Jupter Notebooks](https://jupyter.org/) but using F# and C# kernels and integrated with [VScode](https://code.visualstudio.com/insiders/). Now you can test new ideas and share without a mess of folders or wait a long time to compile the solution.
 
-Install now following:
-* [VS Code insiders](https://code.visualstudio.com/insiders/)
-* [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1) 
+## What is this
 
-## How to use? 
-1. Read this [.NET Interactive Preview 3](https://devblogs.microsoft.com/dotnet/net-interactive-preview-3-vs-code-insiders-and-polyglot-notebooks/).
-2. Clone this repository.
-3. Enjoy    ͡° ͜ʖ  ͡°.
-___
-## ☣ My Experiences:  
+That is a space when I`ll make some [☣ - experiences](WIP) or create little articles, talking about things I love like [λ - Functional programming](WIP).
+
+## How I make it
+
+Before I need tell a little history because I chose this stack.  
+Once upon a time a magic software builder called Microsoft created a magic artifact called [Microsoft interact](https://devblogs.microsoft.com/dotnet/). The artifact holder have a big power of... make same stuff than jupyter notebook with little advantages like the communication between different languages in same notebook and VS Code facilities, but I preferred use some magic artifacts already works, [Jupyter lab](https://jupyterlab.readthedocs.io/en/stable/#), than use another is on preview version and not works so well.
+
+Microsoft Interact is a cool tool I use for some proof of concept or test some complex logic, because you don't need mess of folder or any fsproj/csproj just write and run, but have problems like is hard to share because .Net environment is so heavy or VS Code insiders instability, so because this problems I chose jupyter notebook.  
+Wait a second, but to use jupyter notebook you still need a environment, how to share the code without local environment?  
+So another magic artifact Docker.
+
+## ☣ My Experiences
+
 * [Different ways to make a query on mongoDB with C#](https://github.com/nathancaracho/tower-of-windsock/blob/master/experiences/MongoDbQueries.ipynb) ⚙ **WIP**

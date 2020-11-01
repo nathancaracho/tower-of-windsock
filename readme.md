@@ -24,8 +24,16 @@ Now to support all those environments the [Docker](https://www.docker.com/). Bas
 ## Why use this stack?
 
 Once upon a time a magic software builder called Microsoft created a magic artifact called [Microsoft interact VS Code](https://devblogs.microsoft.com/dotnet/net-interactive-preview-3-vs-code-insiders-and-polyglot-notebooks/). The artifact holder have a big power of... make same stuff than jupyter notebook with little advantages like the communication between different languages in same notebook and VS Code facilities, but I preferred use some magic artifacts already works, [Jupyter lab](https://jupyterlab.readthedocs.io/en/stable/#), than use another is on preview version and not works so well. Ok.. That is not full truth, I'm yet using [Microsoft Interact](https://github.com/dotnet/interactive) but without VS Code Insiders, but using **F#** and **C#** Kernel.
-But we has the environment problem yet, so to resolve that problem I used another magic artifact, the [Docker](https://www.docker.com/). That way is easy to share the environment by a **cookbook** and build it locally or use a cool service like [My Binder](https://mybinder.org/) to host the notebooks.
-  
+But we has the environment problem yet, so to resolve that problem I used another magic artifact, the [Docker](https://www.docker.com/). That way is easy to share the environment by a **cookbook** and build it locally or use a cool service like [My Binder](https://mybinder.org/) to host the notebooks.  
+
+## How to use ##
+
+To read the articles you have three possibilities, first  you can click on [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/HEAD) in this doc head, this button will redirect you one folder with all **jupyter notebooks** files, just chose one and have fun.  Other way is click on [Notebooks Links](#Notebooks-Links), this links will redirect you to  specific notebook My Binder Page.  
+The last way is using **Docker**, just fallow the instructions below:
+1. On project directory root run the command `docker-compose up`.
+
+***And just that...*** 
+Now a link you be generated after image build, click on link and enjoy it. 
 
 
 ### Notebooks Links ###

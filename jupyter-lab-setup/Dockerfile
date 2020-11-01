@@ -1,7 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1.302-focal
 
-ARG HTTP_PORT_RANGE=1100-1200
-
 # Opt out of telemetry until after we install jupyter when building the image, this prevents caching of machine id
 ENV DOTNET_TRY_CLI_TELEMETRY_OPTOUT=true
 
@@ -45,7 +43,6 @@ ENV DOTNET_TRY_CLI_TELEMETRY_OPTOUT=false
 
 
 EXPOSE 8888
-EXPOSE ${HTTP_PORT_RANGE}
 
 RUN mkdir notebooks
 

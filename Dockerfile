@@ -48,7 +48,7 @@ RUN jupyter labextension install @aquirdturtle/collapsible_headings
 # Install lastest build from master branch of Microsoft.DotNet.Interactive from myget
 RUN dotnet tool install --tool-path /usr/share/dotnet-interactive Microsoft.dotnet-interactive --add-source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
 RUN ln -s /usr/share/dotnet-interactive/dotnet-interactive /usr/bin/dotnet-interactive
-RUN dotnet interactive jupyter install --http-port-range ${HTTP_PORT_RANGE}
+RUN dotnet interactive jupyter install
 
 # Enable telemetry once we install jupyter for the image
 ENV DOTNET_TRY_CLI_TELEMETRY_OPTOUT=false

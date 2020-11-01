@@ -58,5 +58,3 @@ COPY ./notebooks ${HOME}/notebooks
 EXPOSE 8888
 
 WORKDIR notebooks
-
-ENTRYPOINT jupyter lab --ip=0.0.0.0  --allow-root  --notebook-dir=/notebooks/

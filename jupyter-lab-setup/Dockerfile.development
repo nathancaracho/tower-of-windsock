@@ -36,13 +36,12 @@ RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker
 # Dowloading extentions end
 RUN sudo apt-get update && \sudo apt-get install fonts-firacode
 # Install lastest build from master branch of Microsoft.DotNet.Interactive from myget
-RUN dotnet tool install --tool-path /usr/share/dotnet-interactive Microsoft.dotnet-interactive --add-source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+RUN dotnet tool install --tool-path /usr/share/dotnet-interactive Microsoft.dotnet-interactive
 RUN ln -s /usr/share/dotnet-interactive/dotnet-interactive /usr/bin/dotnet-interactive
 RUN dotnet interactive jupyter install
 
 # Enable telemetry once we install jupyter for the image
 ENV DOTNET_TRY_CLI_TELEMETRY_OPTOUT=false
-RUN jupyter bundlerextension enable --py jupyter_to_medium._bundler --sys-prefix
 # Adding jupyter lab users settings
 COPY ./settings  ./root/.jupyter/lab/user-settings/@jupyterlab
 

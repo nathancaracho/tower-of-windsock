@@ -45,7 +45,7 @@ Now a link you be generated after image build, click on link and enjoy it.
 
 **λ - Lambda Saga**
 
-* [Currying](https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/HEAD?filepath=lambda-saga%2Fcurrying.ipynb) ⚙ **WIP**
+* [Currying](https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/HEAD?filepath=lambda-saga%2Fcurrying.ipynb)
 
 
 [csharp]:https://docs.microsoft.com/dotnet/csharp/

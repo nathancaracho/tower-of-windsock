@@ -26,23 +26,22 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
 RUN python3 -m pip install setuptools
 RUN python3 -m pip install jupyter
 RUN python3 -m pip install jupyterlab
-RUN python3 -m pip install nb-mermaid 
 RUN python3 -m pip install pandoc
 
 # Dowloading extentions start
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 RUN sudo apt-get install nodejs
+RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker
 # RUN jupyter labextension install @aquirdturtle/collapsible_headings
 # Dowloading extentions end
 RUN sudo apt-get update && \sudo apt-get install fonts-firacode
 # Install lastest build from master branch of Microsoft.DotNet.Interactive from myget
-RUN dotnet tool install --tool-path /usr/share/dotnet-interactive Microsoft.dotnet-interactive --add-source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json"
+RUN dotnet tool install --tool-path /usr/share/dotnet-interactive Microsoft.dotnet-interactive
 RUN ln -s /usr/share/dotnet-interactive/dotnet-interactive /usr/bin/dotnet-interactive
 RUN dotnet interactive jupyter install
 
 # Enable telemetry once we install jupyter for the image
 ENV DOTNET_TRY_CLI_TELEMETRY_OPTOUT=false
-
 # Adding jupyter lab users settings
 COPY ./settings  ./root/.jupyter/lab/user-settings/@jupyterlab
 

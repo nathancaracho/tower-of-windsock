@@ -3,8 +3,8 @@ services:
   local-notebooks:
     container_name: local-notebooks
     build:
-      context: ./jupyter-lab-setup
-      dockerfile: Dockerfile.development
+      context: ./development
+      dockerfile: Dockerfile
     volumes:
       - ./notebooks:/notebooks
     ports:

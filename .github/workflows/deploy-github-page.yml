@@ -11,10 +11,10 @@ jobs:
         with:
           token: ${{secrets.ACCESS_TOKEN}}
       - run: docker-compose run build-page
-      - run: cd /_build/html
-      - uses: EndBug/add-and-commit@v7
+      - name: Deploy
+      - uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          add: '/* --force'
-          branch: 'gh_page'
-          message: 'deploy'
-          push: 'origin gh_page --force'
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-page # The branch the action should deploy to.
+          FOLDER: _build/html # The folder the action should deploy.
+        

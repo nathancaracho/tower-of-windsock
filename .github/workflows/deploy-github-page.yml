@@ -8,12 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: docker-compose run --exit-code-from build-page 
-        name: build
-      - run: | 
-          cd _build
-          && git init 
-          && git add -A 
-          && git commit - "deploy" 
-          && git push -f git@github.com:${{ secrets.ACCESS_TOKEN }}/tower-of-windsock.git gh_page
+        env:
+          ACCESS_TOKEN: secrets.ACCESS_TOKEN
+      - run: docker build . 
         name: deploy

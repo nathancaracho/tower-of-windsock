@@ -14,7 +14,7 @@ jobs:
         name: build
       - uses: EndBug/add-and-commit@v7
         with:
-          add: '_build/html/* --force'
+          add: '_build/html/ --force'
           branch: 'gh_page'
           message: 'deploy'
           push: true

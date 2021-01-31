@@ -8,7 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        env:
-          ACCESS_TOKEN: secrets.ACCESS_TOKEN
-      - run: docker build . 
-        name: deploy
+        with:
+          token: ${{secrets.ACCESS_TOKEN}}
+      - run: docker-compose run build-pag
+        name: build
+      - uses: EndBug/add-and-commit@v7
+        with:
+          add: '_build'
+          branch: 'gh_page'
+          message: 'deploy'
+          push: true

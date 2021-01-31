@@ -11,7 +11,6 @@ jobs:
         with:
           token: ${{secrets.ACCESS_TOKEN}}
       - run: docker-compose run build-page
-      - name: Deploy
       - uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

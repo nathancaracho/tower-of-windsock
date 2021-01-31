@@ -17,5 +17,4 @@ jobs:
           add: '_build/html/* --force'
           branch: 'gh_page'
           message: 'deploy'
-          push: true
-          pull_strategy: '--rebase'
+          push: 'origin gh_page --force'

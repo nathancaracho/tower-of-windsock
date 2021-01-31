@@ -3,8 +3,8 @@ services:
   deploy-page: 
     container_name: deploy-page
     build:
-      context: ./build
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.page
   local-notebooks:
     container_name: local-notebooks
     build:

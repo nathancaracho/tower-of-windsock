@@ -7,4 +7,4 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - run: docker build .
+      - run: docker-compose up --exit-code-from deploy-page

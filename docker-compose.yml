@@ -1,5 +1,10 @@
 version: "3.5"
 services:
+  deploy-page: 
+    container_name: deploy-page
+    build:
+      context: ./build
+      dockerfile: Dockerfile
   local-notebooks:
     container_name: local-notebooks
     build:

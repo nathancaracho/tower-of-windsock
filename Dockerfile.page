@@ -52,6 +52,7 @@ RUN dotnet_sdk_version=3.1.301 \
     # Trigger first run experience by running arbitrary cmd
     && dotnet help
 
+
 # Copy notebooks
 
 COPY . ${HOME}/build/
@@ -81,14 +82,5 @@ ENV DOTNET_TRY_CLI_TELEMETRY_OPTOUT=false
 RUN jupyter-book build build
 
 WORKDIR ${HOME}/build/_build
-
-RUN echo "deploy - start"
-
-RUN git init \
-    && git add -A \
-    && git commit - "deploy" \
-    && git push -f git@github.com:nathancaracho/tower-of-windsock.git gh_page
-
-RUN echo "deploy - end"
 
 RUN cd -

@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   deploy-page: 
-    container_name: deploy-page
+    container_name: build-page
     build:
       context: .
       dockerfile: Dockerfile.build-page

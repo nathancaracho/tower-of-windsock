@@ -83,4 +83,3 @@ RUN jupyter-book build build
 
 WORKDIR ${HOME}/build/_build
 
-RUN cd -

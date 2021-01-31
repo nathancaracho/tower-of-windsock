@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: docker-compose up --exit-code-from deploy-page 
+        name: build
+      - run: docker-compose up --exit-code-from build-page 
+        name: deploy
       - run: | 
           cd _build
           && git init 

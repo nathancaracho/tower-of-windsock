@@ -1,6 +1,6 @@
 version: "3.5"
 services:
-  deploy-page: 
+  build-page: 
     container_name: build-page
     build:
       context: .

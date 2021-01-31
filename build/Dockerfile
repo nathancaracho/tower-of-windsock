@@ -3,9 +3,7 @@ FROM jupyter/base-notebook:latest
 # Install .NET CLI dependencies
 
 ARG NB_USER=jovyan
-ARG NB_UID=1000
 ENV USER ${NB_USER}
-ENV NB_UID ${NB_UID}
 ENV HOME /home
 
 
@@ -54,12 +52,7 @@ RUN dotnet_sdk_version=3.1.301 \
     && dotnet help
 
 
-
-RUN chown -R ${NB_UID} ${HOME}
-USER ${USER}
-
 #Install nteract 
-RUN pip install nteract_on_jupyter
 RUN pip install jupyter-book
 
 # Install lastest build from master branch of Microsoft.DotNet.Interactive from myget

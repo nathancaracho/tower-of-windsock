@@ -11,11 +11,10 @@ jobs:
         with:
           token: ${{secrets.ACCESS_TOKEN}}
       - run: docker-compose run build-page
-        name: build
+      - run: cd /_build/html
       - uses: EndBug/add-and-commit@v7
         with:
-          add: '_build/html/* --force'
-          cwd: './_build/html/'
+          add: '/* --force'
           branch: 'gh_page'
           message: 'deploy'
           push: 'origin gh_page --force'

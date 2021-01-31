@@ -18,3 +18,4 @@ jobs:
           branch: 'gh_page'
           message: 'deploy'
           push: true
+          pull_strategy: '--no-rebase or --no-ff or --rebase'

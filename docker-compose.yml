@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.build-page
+    volumes:
+      - ./:/src
+      
   local-notebooks:
     container_name: local-notebooks
     build:

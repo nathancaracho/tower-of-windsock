@@ -32,9 +32,9 @@ RUN python3 -m pip install pandoc
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 RUN sudo apt-get install nodejs
 RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker
-# RUN jupyter labextension install @aquirdturtle/collapsible_headings
+RUN jupyter labextension install @aquirdturtle/collapsible_headings
 # Dowloading extentions end
-RUN sudo apt-get update && \sudo apt-get install fonts-firacode
+
 # Install lastest build from master branch of Microsoft.DotNet.Interactive from myget
 RUN dotnet tool install --tool-path /usr/share/dotnet-interactive Microsoft.dotnet-interactive
 RUN ln -s /usr/share/dotnet-interactive/dotnet-interactive /usr/bin/dotnet-interactive

@@ -54,13 +54,14 @@ RUN dotnet_sdk_version=3.1.301 \
 
 # Copy notebooks
 
-COPY ./notebooks/ ${HOME}/notebooks/
+COPY . ${HOME}/build/
 
 RUN chown -R ${NB_UID} ${HOME}
 USER ${USER}
 
 #Install nteract 
 RUN pip install nteract_on_jupyter
+RUN pip install jupyter-book
 
 # Install lastest build from master branch of Microsoft.DotNet.Interactive from myget
 RUN dotnet tool install -g Microsoft.dotnet-interactive
@@ -76,5 +77,18 @@ RUN dotnet interactive jupyter install
 # Enable telemetry once we install jupyter for the image
 ENV DOTNET_TRY_CLI_TELEMETRY_OPTOUT=false
 
-# Set root to notebooks
-WORKDIR ${HOME}/notebooks/
+
+RUN jupyter-book build build
+
+WORKDIR ${HOME}/build/_build
+
+RUN echo "deploy - start"
+
+RUN git init \
+    && git add -A \
+    && git commit - "deploy" \
+    && git push -f git@github.com:nathancaracho/tower-of-windsock.git gh_page
+
+RUN echo "deploy - end"
+
+RUN cd -

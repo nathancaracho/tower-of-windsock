@@ -1,0 +1,11 @@
+# Table of content
+# Learn more at https://jupyterbook.org/customize/toc.html
+#
+- file: readme
+
+- part: Lambda Saga
+  chapters:
+    - file: notebooks/lambda-saga/currying
+- part: Experiences
+  chapters:
+    - file: notebooks/experiences/MongoDbQueries

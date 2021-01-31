@@ -37,17 +37,6 @@ The last way is using [Docker][Docker], just fallow the instructions below:
 Now a link you be generated after image build, click on link and enjoy it. 
 
 
-### Notebooks Links ###
-
-**The experiences ☣**
-
-* [Different ways to make a query on mongoDB with C#](https://github.com/nathancaracho/tower-of-windsock/blob/master/notebooks/experiences/MongoDbQueries.ipynb) ⚙ **WIP**
-
-**λ - Lambda Saga**
-
-* [Currying](https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/HEAD?filepath=lambda-saga%2Fcurrying.ipynb)
-
-
 [csharp]:https://docs.microsoft.com/dotnet/csharp/
 [fsharp]:https://docs.microsoft.com/dotnet/fsharp/
 [Unit Engine]:https://unity.com/

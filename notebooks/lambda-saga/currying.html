@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lambda Saga - Currying &#8212; Tower of windsock</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Different ways to make a query on mongoDB with C#" href="../experiences/MongoDbQueries.html" />
+    <link rel="prev" title="The Tower of Windsock" href="../../readme.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Tower of windsock</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../readme.html">
+   The Tower of Windsock
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lambda Saga
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Lambda Saga - Currying
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Experiences
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../experiences/MongoDbQueries.html">
+   Different ways to make a query on mongoDB with
+   <em>
+    <strong>
+     C#
+    </strong>
+   </em>
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/lambda-saga/currying.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nathancaracho/tower-of-windsock"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/nathancaracho/tower-of-windsock/issues/new?title=Issue%20on%20page%20%2Fnotebooks/lambda-saga/currying.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/main?urlpath=tree/notebooks/notebooks/lambda-saga/currying.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-signature">
+   Function signature
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explaining-currying">
+   Explaining Currying
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regular-sum-function">
+     Regular sum function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#curried-sum-function">
+     Curried sum function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-we-did">
+     What we did
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-this-works">
+     How this works
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#currying-on-fsharp">
+     Currying on FSharp
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-use-of-currying">
+   The use of currying
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explaining-the-expression">
+     Explaining the expression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="lambda-saga-currying">
+<h1>Lambda Saga - Currying<a class="headerlink" href="#lambda-saga-currying" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>If you need share a specific behavior with functional programming, Currying is the answer. Created by <a class="reference external" href="https://pt.wikipedia.org/wiki/Haskell_Curry">Haskell Curry</a> currying basically is a technique to transform a multiple arguments or <a class="reference external" href="https://en.wikipedia.org/wiki/Tuple">n-tuple</a> argument function in a chain of single arguments functions.
+<span class="math notranslate nohighlight">\(f:(x * y) \to z\)</span> <strong>to</strong> <span class="math notranslate nohighlight">\((f): x \to (y \to z)\)</span></p>
+</div>
+<div class="section" id="function-signature">
+<h2>Function signature<a class="headerlink" href="#function-signature" title="Permalink to this headline">¶</a></h2>
+<p>Let understanding what is <span class="math notranslate nohighlight">\( \to \)</span>, <span class="math notranslate nohighlight">\( (x * y) \)</span>, <strong>Domain</strong> and <strong>Range</strong>. The tuple or <span class="math notranslate nohighlight">\( (x * y) \)</span> is a product of two types or a composing between two types, arrow function or <span class="math notranslate nohighlight">\( \to \)</span> is used to indicate a map of a set into another set, in other words indicate the argument and return, <strong>Domain</strong> is the argument of a function and <strong>Range</strong> is a result of a function.<br />
+Look below the example:</p>
+<p><span class="math notranslate nohighlight">\( f: x \to y \)</span></p>
+<p>The function above has <span class="math notranslate nohighlight">\( x \)</span> as <strong>Domain</strong> and <span class="math notranslate nohighlight">\( y \)</span> as <strong>Range</strong> and that is read as <strong>from</strong> <span class="math notranslate nohighlight">\( x \)</span> <strong>to</strong> <span class="math notranslate nohighlight">\( y \)</span>, so the function <span class="math notranslate nohighlight">\( f \)</span> has <span class="math notranslate nohighlight">\( x \)</span> as argument and <span class="math notranslate nohighlight">\( y \)</span> as result. Now look another example with a tuple as <strong>Domain</strong>:</p>
+<p><span class="math notranslate nohighlight">\( f: (x*y) \to z \)</span></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Symbol/Name</strong></p></th>
+<th class="head"><p><strong>Means</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\to\)</span></p></td>
+<td><p>returns</p></td>
+</tr>
+<tr class="row-odd"><td><p>Domain</p></td>
+<td><p>argument type</p></td>
+</tr>
+<tr class="row-even"><td><p>Range</p></td>
+<td><p>result type</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\((x * y)\)</span></p></td>
+<td><p>Tuple</p></td>
+</tr>
+</tbody>
+</table>
+<p>Look the same examples with F#:</p>
+<p><span class="math notranslate nohighlight">\( multiply: int \to int \)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-fsharp notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="nv">multiply</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="n">multiply</span> <span class="mi">5</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\( multiply: (int * int) \to int \)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-fsharp notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="nv">multiply</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">)</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="n">multiply</span> <span class="o">(</span><span class="mi">5</span><span class="o">,</span><span class="mi">3</span><span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="explaining-currying">
+<h2>Explaining Currying<a class="headerlink" href="#explaining-currying" title="Permalink to this headline">¶</a></h2>
+<p>The ideia is share the sum behavior, so we will create two functions. First the <code class="docutils literal notranslate"><span class="pre">sum</span></code> function, that function will receive two int type, <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">second</span></code>, as arguments and return a int type value, <code class="docutils literal notranslate"><span class="pre">first</span></code> + <code class="docutils literal notranslate"><span class="pre">second</span></code>. Last we will create <code class="docutils literal notranslate"><span class="pre">addOne</span></code> function, that function will receive just one int argument called<code class="docutils literal notranslate"><span class="pre">second</span></code> and add 1 to this argument. That way we will share the <code class="docutils literal notranslate"><span class="pre">sum</span></code> behavior to <code class="docutils literal notranslate"><span class="pre">addOne</span></code> function.</p>
+<div class="section" id="regular-sum-function">
+<h3>Regular sum function<a class="headerlink" href="#regular-sum-function" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(sum: (int * int) \to int\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-fsharp notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="nv">sum</span> <span class="o">(</span><span class="n">first</span> <span class="o">,</span> <span class="n">second</span><span class="o">)</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="n">second</span>
+
+<span class="k">let</span> <span class="nv">addOne</span> <span class="n">second</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="n">second</span><span class="o">)</span>
+    
+<span class="n">addOne</span> <span class="mi">2</span>    
+<span class="o">|&gt;</span> <span class="n">printf</span> <span class="s">&quot;regular function result: %d&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>That is a regular function with a tuple as argument and it only can applied with both values.</p>
+</div>
+<div class="section" id="curried-sum-function">
+<h3>Curried sum function<a class="headerlink" href="#curried-sum-function" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(sum: int \to int \to int\)</span> or <span class="math notranslate nohighlight">\(sum: int \to (int \to int)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-fsharp notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="nv">sum</span> <span class="n">first</span> <span class="o">=</span> <span class="c1">//main function</span>
+    <span class="k">let</span> <span class="nv">subFunction</span> <span class="n">second</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="n">second</span>
+    <span class="n">subFunction</span>
+    
+<span class="k">let</span> <span class="nv">addOne</span> <span class="o">=</span> <span class="n">sum</span> <span class="mi">1</span> <span class="c1">// int -&gt; int</span>
+
+<span class="n">addOne</span> <span class="mi">2</span>
+<span class="o">|&gt;</span> <span class="n">printf</span> <span class="s">&quot;curried sum result: %d&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="what-we-did">
+<h3>What we did<a class="headerlink" href="#what-we-did" title="Permalink to this headline">¶</a></h3>
+<hr class="docutils" />
+<p>We created two functions, the main function, <span class="math notranslate nohighlight">\( int \to (int \to int) \)</span>, has one int type argument called <code class="docutils literal notranslate"><span class="pre">first</span></code> and return  sub-function, that function, <span class="math notranslate nohighlight">\( int \to int \)</span>, has one int type argument called <code class="docutils literal notranslate"><span class="pre">second</span></code> and in your body has the arguments sum.</p>
+</div>
+<div class="section" id="how-this-works">
+<h3>How this works<a class="headerlink" href="#how-this-works" title="Permalink to this headline">¶</a></h3>
+<hr class="docutils" />
+<p>The <em>main function</em> receive a value as parameter and “<strong>hold it</strong>” in your inner scope, this <em>main function</em> return a single parameter <em>sub-function</em> and that <em>sub-function</em> sum <em>main function</em> parameter with your own parameter. That is only possible because the <em>sub-function</em> is inside <em>main function</em> inner scope, that way it can access all <em>main function</em> variables, that is called <a class="reference external" href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">closure</a>.<br />
+Basically when you create a function all your environment is stored too, it works look like a <a class="reference external" href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope">lexical/static scope</a> if scope is a part of code <a class="reference external" href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope">lexical/static scope</a> is a free or bounded variable scope access range. See an example below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-fsharp notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="nv">lexicalExample</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">// &lt;- lexical scope start </span>
+    <span class="k">let</span> <span class="nv">multiply</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">// &lt;- lexical scope end</span>
+    <span class="n">multiply</span> <span class="mi">5</span>
+<span class="n">lexicalExample</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The example above when variable <code class="docutils literal notranslate"><span class="pre">a</span></code> is created a <a class="reference external" href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope">lexical/static scope</a> is created too and the function <code class="docutils literal notranslate"><span class="pre">multiply</span></code> is created inside that <a class="reference external" href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope">lexical/static scope</a>, that way the <code class="docutils literal notranslate"><span class="pre">multiply</span></code> function can use the <code class="docutils literal notranslate"><span class="pre">a</span></code> value. When <code class="docutils literal notranslate"><span class="pre">a</span></code> variable is recreated another <a class="reference external" href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope">lexical/static scope</a> is create but this not change the <code class="docutils literal notranslate"><span class="pre">a</span></code>  value used by <code class="docutils literal notranslate"><span class="pre">multiply</span></code> function because this function was created inside last <a class="reference external" href="https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scope_vs._dynamic_scope">lexical/static scope</a>.
+<br></p>
+<div style="font-family:Fira Code;padding:5px 15px;padding:5px 15px;">
+    <span style="color:#4caf50;font-weight:bold;">let</span> lexicalExample =<br>  
+    <div>
+            <div style="border:#f44336 2px dashed;background-color:#f4433622;margin-bottom:4px;padding:5px 15px;display:inline-block"> 
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4caf50;font-weight:bold">let</span> a = 2<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4caf50;font-weight:bold">let</span> multiply b = a * b 
+            </div>
+               <b>$\to$ First lexical scope</b>
+        </div>
+        <div>
+            <div style="border:#00bcd4 2px dashed;background-color:#00bcd422;margin-bottom:4px;padding:5px 15px;display:inline-block"> 
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4caf50;font-weight:bold">let</span> a = 3<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;multiply 5
+            </div>
+             <b>$\to$  Second lexical scope</b>
+    </div>
+    lexicalExample
+</div>  
+<br>  
+<p>Now when we talk about <a class="reference external" href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">lexical closure</a> the concept is the same, but with one difference the scope is created when the function is created, so the all function arguments is accessible for anything inside function scope.</p>
+<div style="font-family:Fira Code;padding:5px 15px;padding:5px 15px;">
+    <span style="color:#4caf50;font-weight:bold;">let</span> lexicalClosureExample argument =<br>  
+    <div style="border:#ffea00 2px dashed;background-color:#ffea0022;margin-bottom:4px;padding:5px 15px;display:inline-block">
+        <div>
+        <div style="border:#f44336 2px dashed;background-color:#f4433622;margin-bottom:4px;padding:5px 15px;display:inline-block"> 
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4caf50;font-weight:bold">let</span> a = 2<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4caf50;font-weight:bold">let</span> multiply b = a * b + argument
+        </div>
+           <b>$\to$ First lexical scope</b>
+    </div>
+    <div>
+        <div style="border:#00bcd4 2px dashed;background-color:#00bcd422;margin-bottom:4px;padding:5px 15px;display:inline-block"> 
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4caf50;font-weight:bold">let</span> a = 3<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;multiply 5
+        </div>
+         <b>$\to$  Second lexical scope</b>
+    </div>
+     </div>
+        <b>$\to$ lexical closure</b>
+    <br>
+    lexicalExample 10
+</div>  
+<br>
+</div>
+<div class="section" id="currying-on-fsharp">
+<h3>Currying on FSharp<a class="headerlink" href="#currying-on-fsharp" title="Permalink to this headline">¶</a></h3>
+<hr class="docutils" />
+<p>Use currying with <strong>FSharp</strong> is easy because all multi arguments functions is curried by default, so not is necessary create it manually. Look it below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-fsharp notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="nv">sum</span> <span class="n">first</span> <span class="n">second</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="n">second</span>
+
+<span class="k">let</span> <span class="nv">addOne</span> <span class="o">=</span> <span class="n">sum</span> <span class="mi">1</span> <span class="c1">// int -&gt; int</span>
+
+<span class="n">addOne</span> <span class="mi">2</span>
+<span class="o">|&gt;</span> <span class="n">printf</span> <span class="s">&quot;implicit curried sum result: %d&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is the same than first function and we can simplify this further. Look it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-fsharp notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="nv">addOne</span> <span class="o">=</span> <span class="o">(+)</span> <span class="mi">1</span> <span class="c1">// int -&gt; int</span>
+
+<span class="n">addOne</span> <span class="mi">2</span>
+<span class="o">|&gt;</span> <span class="n">printf</span> <span class="s">&quot;simplify curried sum result: %d&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The sum operator is a <a class="reference external" href="https://en.wikipedia.org/wiki/Infix_notation">infix notation</a> and a multi argument too so is by default curried.<br />
+<span class="math notranslate nohighlight">\((+): int \to int \to int\)</span></p>
+</div>
+</div>
+<div class="section" id="the-use-of-currying">
+<h2>The use of currying<a class="headerlink" href="#the-use-of-currying" title="Permalink to this headline">¶</a></h2>
+<p>With currying we are able to partial apply a function, in others words we fix the first of N arguments of a function and reuse the resulted function. That technique possibility us to share a behavior without create a new function and with lightweight syntax. A good examples of curried function is <code class="docutils literal notranslate"><span class="pre">Seq.reduce</span></code> and <code class="docutils literal notranslate"><span class="pre">|&gt;</span></code>, look it below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-fsharp notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">;</span><span class="mi">4</span><span class="o">]</span>
+<span class="o">|&gt;</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">reduce</span> <span class="o">(+)</span>
+<span class="o">|&gt;</span> <span class="n">printf</span> <span class="s">&quot;sum of all list itens: %d&quot;</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="explaining-the-expression">
+<h3>Explaining the expression<a class="headerlink" href="#explaining-the-expression" title="Permalink to this headline">¶</a></h3>
+<p>First we need understanding what is the operator <code class="docutils literal notranslate"><span class="pre">|&gt;</span></code> or <a class="reference external" href="https://docs.microsoft.com/pt-br/dotnet/fsharp/language-reference/symbol-and-operator-reference/">forward pipe operator</a>. Basically the <a class="reference external" href="https://docs.microsoft.com/pt-br/dotnet/fsharp/language-reference/symbol-and-operator-reference/">forward pipe operator</a> is a <a class="reference external" href="https://en.wikipedia.org/wiki/Infix_notation">infix notation</a> where the operator apply left value to right function.<br />
+<span class="math notranslate nohighlight">\( f: a \to (a \to b) \to b \)</span></p>
+<div class="highlight-f# notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="o">(|&gt;)</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="n">a</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Seq.reduce</span></code> function have two arguments, first <span class="math notranslate nohighlight">\( (int \to int \to int) \)</span> and last <span class="math notranslate nohighlight">\( seq&lt;int&gt; \)</span>. If you are a good observer see this signature <span class="math notranslate nohighlight">\( int \to int \to int \)</span> is the same signature than <code class="docutils literal notranslate"><span class="pre">(+)</span></code> operator, so we partial apply <code class="docutils literal notranslate"><span class="pre">(+)</span></code> operator to <code class="docutils literal notranslate"><span class="pre">Seq.reduce</span></code> and after apply <code class="docutils literal notranslate"><span class="pre">[1;2;3;4]</span></code> to <code class="docutils literal notranslate"><span class="pre">Seq.reduce</span> <span class="pre">(+)</span></code>.</p>
+<p>The same expression can be write with a different way look it below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-fsharp notranslate"><div class="highlight"><pre><span></span><span class="k">let</span> <span class="nv">sumAll</span> <span class="o">=</span> <span class="nn">Seq</span><span class="p">.</span><span class="n">reduce</span> <span class="o">(+)</span> <span class="c1">// seq&lt;int&gt; -&gt; int</span>
+
+<span class="n">sumAll</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">;</span><span class="mi">4</span><span class="o">]</span>
+<span class="o">|&gt;</span> <span class="n">printf</span> <span class="s">&quot;sum of all of integer list : %d&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the same of last expression but  creating a new function <span class="math notranslate nohighlight">\( sumAll: seq&lt;int&gt; \to int \)</span> partially applying <code class="docutils literal notranslate"><span class="pre">(+)</span></code> to <code class="docutils literal notranslate"><span class="pre">Seq.reduce</span></code>. That way we can share the behavior of sum all itens of a list.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>The currying is a great technique to share behavior, basically transform a <a class="reference external" href="https://en.wikipedia.org/wiki/Tuple">n-tuple</a> argument function to a chain of functions with one argument using lexical closure. Use currying in Fsharp is easy because all multi arguments is curried by default.</p>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pt.wikipedia.org/wiki/Currying">Currying wikipedia</a></p></li>
+<li><p><a class="reference external" href="http://www.codefugue.com/partial-application-vs-currying/">Partial application vs. Curriyng</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/better-programming/functional-programming-currying-vs-partial-application-53b8b05c73e3#:~:text=Currying%3A%20A%20function%20returning%20another,function%20can%20take%20several%20parameters.">Funtional Programming: Currying vs. Partial application</a></p></li>
+<li><p><a class="reference external" href="https://docs.microsoft.com/dotnet/fsharp/introduction-to-functional-programming/first-class-functions#curried-functions">Curried functions</a></p></li>
+<li><p><a class="reference external" href="https://fsharpforfunandprofit.com/posts/partial-application/">Partial application</a></p></li>
+<li><p><a class="reference external" href="https://fsharpforfunandprofit.com/posts/currying/">Currying</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/5301181/what-are-the-practical-advantages-of-currying">What are the practical advantages of currying?</a></p></li>
+<li><p><a class="reference external" href="https://wiki.haskell.org/Currying">Currying Haskell doc.</a></p></li>
+<li><p><a class="reference external" href="https://lukajcb.github.io/blog/scala/2016/03/08/a-real-world-currying-example.html#:~:text=It%20allows%20us%20to%20easily,like%20map%20%2C%20filter%20or%20reduce%20.">A real world Currying example</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Partial_application">Partial application wikipedia</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/List_of_mathematical_symbols">mathematical symbols</a></p></li>
+<li><p><a class="reference external" href="https://sookocheff.com/post/fp/domain-range-codomain/">domain range codomain</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: ".net-fsharp"
+        },
+        kernelOptions: {
+            kernelName: ".net-fsharp",
+            path: "./notebooks/lambda-saga"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = '.net-fsharp'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../../readme.html" title="previous page">The Tower of Windsock</a>
+    <a class='right-next' id="next-link" href="../experiences/MongoDbQueries.html" title="next page">Different ways to make a query on mongoDB with <em><strong>C#</strong></em></a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Nathan Branco Caracho<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

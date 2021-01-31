@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Tower of Windsock &#8212; Tower of windsock</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Lambda Saga - Currying" href="notebooks/lambda-saga/currying.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Tower of windsock</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="#">
+   The Tower of Windsock
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lambda Saga
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/lambda-saga/currying.html">
+   Lambda Saga - Currying
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Experiences
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/experiences/MongoDbQueries.html">
+   Different ways to make a query on mongoDB with
+   <em>
+    <strong>
+     C#
+    </strong>
+   </em>
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/readme.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nathancaracho/tower-of-windsock"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/nathancaracho/tower-of-windsock/issues/new?title=Issue%20on%20page%20%2Freadme.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-this">
+   What is this
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-stack">
+   The Stack
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#development-languages">
+     Development languages
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#environment">
+     Environment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-use-this-stack">
+   Why use this stack?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-use">
+   How to use
+  </a>
+  <ul class="nav section-nav flex-column">
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="the-tower-of-windsock">
+<h1>The Tower of Windsock<a class="headerlink" href="#the-tower-of-windsock" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<div class="section" id="what-is-this">
+<h2>What is this<a class="headerlink" href="#what-is-this" title="Permalink to this headline">¶</a></h2>
+<p>That is a space when I`ll make some <strong>☣ - Experiences</strong> or create little articles, talking about things I love like <strong>λ - Functional programming</strong>.</p>
+</div>
+<div class="section" id="the-stack">
+<h2>The Stack<a class="headerlink" href="#the-stack" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="development-languages">
+<h3>Development languages<a class="headerlink" href="#development-languages" title="Permalink to this headline">¶</a></h3>
+<p>As development languages I’ll use basically <a class="reference external" href="https://docs.microsoft.com/dotnet/csharp/">C#</a> and <a class="reference external" href="https://docs.microsoft.com/dotnet/fsharp/">F#</a>. <a class="reference external" href="https://docs.microsoft.com/dotnet/csharp/">C#</a> or <strong>CSharp</strong> is a current Microsoft main language, easy to learn basic  concepts c# is an elegant object oriented language, most used in corporative softwares but is so versatile can use in another many cases like game development with <a class="reference external" href="https://unity.com/">Unit Engine</a>. Now <a class="reference external" href="https://docs.microsoft.com/dotnet/fsharp/">F#</a> or <strong>FSharp</strong> is a beauty Functional first language, in another words <a class="reference external" href="https://docs.microsoft.com/dotnet/fsharp/">F#</a> not only Functional like Haskell it can used as Object Oriented too that mean is possible have interoperability between <a class="reference external" href="https://docs.microsoft.com/dotnet/csharp/">C#</a> and <a class="reference external" href="https://docs.microsoft.com/dotnet/fsharp/">F#</a>. Different than <a class="reference external" href="https://docs.microsoft.com/dotnet/csharp/">C#</a>, <a class="reference external" href="https://docs.microsoft.com/dotnet/fsharp/">F#</a> not is use on big scale softwares <strong>yet</strong>, <a class="reference external" href="https://docs.microsoft.com/dotnet/fsharp/">F#</a> is versatile can be used in a big variance of softwares like <a class="reference external" href="https://en.wikipedia.org/wiki/Jet.com">Jet.com</a> used in own Marketplace or in Data science with <a class="reference external" href="https://scisharp.github.io/SciSharp/">SciSharp</a>.</p>
+</div>
+<div class="section" id="environment">
+<h3>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h3>
+<p>Obviously I’ll use .NET framework but with a new feature <a class="reference external" href="https://github.com/dotnet/interactive">Microsoft Interact</a>. The <a class="reference external" href="https://github.com/dotnet/interactive">Microsoft Interact</a> is basically a bunch of tools to give for .NET Framework a interactive power with <a class="reference external" href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> or interactive notebooks, including <a class="reference external" href="https://docs.microsoft.com/dotnet/fsharp/">F#</a> and <a class="reference external" href="https://docs.microsoft.com/dotnet/csharp/">C#</a> <a class="reference external" href="https://jupyter.readthedocs.io/en/latest/projects/kernels.html">Jupyter kernels</a>. So that way is possible combine .NET Framework with <a class="reference external" href="https://jupyter.org/">Jupyter Notebooks</a> and share it without code compilation or local environment necessity.</p>
+<p>Other important environment is the <a class="reference external" href="https://jupyter.org/">Jupyter project</a>. This is open source project to allows create and share interactive document, mixing live coding, charts and markdowns. Use <a class="reference external" href="https://jupyter.readthedocs.io/en/latest/projects/kernels.html">Jupyter kernels</a> to interpreting different languages and <a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/">Jupyter lab</a> as a incredible and customized, by extensions, web based UI.</p>
+<p>Now to support all those environments the <a class="reference external" href="https://www.docker.com/">Docker</a>. Basically <a class="reference external" href="https://www.docker.com/">Docker</a> is a open source platform to admin and create isolate environment using <a class="reference external" href="https://linuxcontainers.org/pt_br/">Linux Containers</a> and a <strong>container</strong> is a isolated packing software with yours dependencies. With <a class="reference external" href="https://www.docker.com/">Docker</a> is easy to create a isolated environment and share it, because you only need share the <strong>“configuration files”</strong> or use some cool cloud service like <a class="reference external" href="https://mybinder.org/">My Binder</a> to host your notebooks with your environment, in another words you just share the cookbook not the food.</p>
+</div>
+</div>
+<div class="section" id="why-use-this-stack">
+<h2>Why use this stack?<a class="headerlink" href="#why-use-this-stack" title="Permalink to this headline">¶</a></h2>
+<p>Once upon a time a magic software builder called Microsoft created a magic artifact called <a class="reference external" href="https://devblogs.microsoft.com/dotnet/net-interactive-preview-3-vs-code-insiders-and-polyglot-notebooks/">Microsoft interact VS Code</a>. The artifact holder have a big power of… make same stuff than jupyter notebook with little advantages like the communication between different languages in same notebook and VS Code facilities, but I preferred use some magic artifacts already works, <a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/">Jupyter lab</a>, than use another is on preview version and not works so well. Ok.. That is not full truth, I’m yet using <a class="reference external" href="https://github.com/dotnet/interactive">Microsoft Interact</a> but without VS Code Insiders, but using <a class="reference external" href="https://docs.microsoft.com/dotnet/fsharp/">F#</a> and <a class="reference external" href="https://docs.microsoft.com/dotnet/csharp/">C#</a> Kernel.
+But we has the environment problem yet, so to resolve that problem I used another magic artifact, the <a class="reference external" href="https://www.docker.com/">Docker</a>. That way is easy to share the environment by a <strong>cookbook</strong> and build it locally or use a cool service like <a class="reference external" href="https://mybinder.org/">My Binder</a> to host the notebooks.</p>
+</div>
+<div class="section" id="how-to-use">
+<h2>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h2>
+<p>To read the articles you have three possibilities, first  you can click on <a class="reference external" href="https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a> in this doc head, this button will redirect you one folder with all <a class="reference external" href="https://jupyter.org/">Jupyter Notebooks</a> files, just chose one and have fun.  Other way is click on <a class="reference external" href="#Notebooks-Links">Notebooks Links</a>, this links will redirect you to  specific notebook My Binder Page.<br />
+The last way is using <a class="reference external" href="https://www.docker.com/">Docker</a>, just fallow the instructions below:</p>
+<ol class="simple">
+<li><p>On project directory root run the command <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">up</span></code>.</p></li>
+</ol>
+<p><em><strong>And just that…</strong></em>
+Now a link you be generated after image build, click on link and enjoy it.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='right-next' id="next-link" href="notebooks/lambda-saga/currying.html" title="next page">Lambda Saga - Currying</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Nathan Branco Caracho<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

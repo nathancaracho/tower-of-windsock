@@ -1,0 +1,843 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Different ways to make a query on mongoDB with C# &#8212; Tower of windsock</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Lambda Saga - Currying" href="../lambda-saga/currying.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Tower of windsock</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../readme.html">
+   The Tower of Windsock
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Lambda Saga
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lambda-saga/currying.html">
+   Lambda Saga - Currying
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Experiences
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Different ways to make a query on mongoDB with
+   <em>
+    <strong>
+     C#
+    </strong>
+   </em>
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/experiences/MongoDbQueries.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nathancaracho/tower-of-windsock"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/nathancaracho/tower-of-windsock/issues/new?title=Issue%20on%20page%20%2Fnotebooks/experiences/MongoDbQueries.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/main?urlpath=tree/notebooks/notebooks/experiences/MongoDbQueries.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dependencies">
+     Dependencies
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mongo-db-docker">
+       Mongo DB - DOCKER
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nuget-packages">
+       Nuget packages
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#client">
+       Client
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-models">
+     Creating Models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instanciate-collections">
+     Instanciate Collections
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#seeding">
+     Seeding
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#first-collection">
+       first Collection
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#second-collection">
+       second Collection
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#util-methods">
+     Util methods
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-queries">
+   The queries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-filters-builder">
+     Using
+     <em>
+      <strong>
+       Filters
+      </strong>
+     </em>
+     Builder
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-simple-query">
+       The Simple Query
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-aggregate-query">
+       The Aggregate Query
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-method-based-linq">
+     Using Method based LINQ
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#explanning">
+       Explanning
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       The Simple Query
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       The Aggregate Query
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-query-based-mongo-driver-linq">
+     Using (Query based)
+     <em>
+      <strong>
+       Mongo driver
+      </strong>
+     </em>
+     LINQ
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Explanning
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       The Simple Query
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id5">
+       The Aggregate Query
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="different-ways-to-make-a-query-on-mongodb-with-c">
+<h1>Different ways to make a query on mongoDB with <em><strong>C#</strong></em><a class="headerlink" href="#different-ways-to-make-a-query-on-mongodb-with-c" title="Permalink to this headline">¶</a></h1>
+<p>The idea is create the same query using different techniques and try understanding the benefits of each one.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<p><em><strong>Reference</strong></em></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.mongodb.com/drivers/csharp">mongo driver doc</a></p></li>
+</ul>
+<div class="section" id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mongo-db-docker">
+<h4>Mongo DB - DOCKER<a class="headerlink" href="#mongo-db-docker" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span>#!pwsh
+docker run -d -p 27017-27017:27017-27017 mongo 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="nuget-packages">
+<h4>Nuget packages<a class="headerlink" href="#nuget-packages" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span>#r &quot;nuget:MongoDB.Driver&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="client">
+<h4>Client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="nn">MongoDB.Driver</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MongoClient</span><span class="p">(</span><span class="s">&quot;mongodb://localhost:27017&quot;</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">database</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="n">GetDatabase</span><span class="p">(</span><span class="s">&quot;firstDatabase&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-models">
+<h3>Creating Models<a class="headerlink" href="#creating-models" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="nn">MongoDB.Bson.Serialization.Attributes</span><span class="p">;</span>
+
+<span class="na">[BsonIgnoreExtraElements]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Collection</span><span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstProperty</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">SecondProperty</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="na">[BsonIgnoreExtraElements]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">FirstCollection</span> <span class="p">:</span> <span class="n">Collection</span><span class="p">{</span>
+    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">SecondCollection</span><span class="p">&gt;</span> <span class="n">SecondCollections</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="na">[BsonIgnoreExtraElements]</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">SecondCollection</span> <span class="p">:</span> <span class="n">Collection</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="instanciate-collections">
+<h3>Instanciate Collections<a class="headerlink" href="#instanciate-collections" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">firstCollection</span> <span class="p">=</span> <span class="n">database</span><span class="p">.</span><span class="n">GetCollection</span><span class="p">&lt;</span><span class="n">FirstCollection</span><span class="p">&gt;(</span><span class="s">&quot;firstCollection&quot;</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">secondCollection</span> <span class="p">=</span> <span class="n">database</span><span class="p">.</span><span class="n">GetCollection</span><span class="p">&lt;</span><span class="n">SecondCollection</span><span class="p">&gt;(</span><span class="s">&quot;secondCollection&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="seeding">
+<h3>Seeding<a class="headerlink" href="#seeding" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="first-collection">
+<h4>first Collection<a class="headerlink" href="#first-collection" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">firstCollections</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">FirstCollection</span><span class="p">&gt;{</span>
+    <span class="k">new</span> <span class="n">FirstCollection</span> <span class="p">{</span><span class="n">FirstProperty</span> <span class="p">=</span> <span class="s">&quot;First&quot;</span><span class="p">,</span> <span class="n">SecondProperty</span> <span class="p">=</span> <span class="m">1</span> <span class="p">},</span>
+    <span class="k">new</span> <span class="n">FirstCollection</span> <span class="p">{</span><span class="n">FirstProperty</span> <span class="p">=</span> <span class="s">&quot;Second&quot;</span><span class="p">,</span> <span class="n">SecondProperty</span> <span class="p">=</span> <span class="m">2</span> <span class="p">},</span>
+    <span class="k">new</span> <span class="n">FirstCollection</span> <span class="p">{</span><span class="n">FirstProperty</span> <span class="p">=</span> <span class="s">&quot;Third&quot;</span><span class="p">,</span> <span class="n">SecondProperty</span> <span class="p">=</span> <span class="m">3</span> <span class="p">},</span>
+    <span class="k">new</span> <span class="n">FirstCollection</span> <span class="p">{</span><span class="n">FirstProperty</span> <span class="p">=</span> <span class="s">&quot;Fourth&quot;</span><span class="p">,</span> <span class="n">SecondProperty</span> <span class="p">=</span> <span class="m">4</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">firstCollection</span><span class="p">.</span><span class="n">InsertMany</span><span class="p">(</span><span class="n">firstCollections</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="second-collection">
+<h4>second Collection<a class="headerlink" href="#second-collection" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">secondCollections</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">SecondCollection</span><span class="p">&gt;{</span>
+    <span class="k">new</span> <span class="n">SecondCollection</span> <span class="p">{</span><span class="n">FirstProperty</span> <span class="p">=</span> <span class="s">&quot;First&quot;</span><span class="p">,</span> <span class="n">SecondProperty</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;I&quot;</span> <span class="p">},</span>
+    <span class="k">new</span> <span class="n">SecondCollection</span> <span class="p">{</span><span class="n">FirstProperty</span> <span class="p">=</span> <span class="s">&quot;Second&quot;</span><span class="p">,</span> <span class="n">SecondProperty</span> <span class="p">=</span> <span class="m">2</span> <span class="p">,</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;II&quot;</span><span class="p">},</span>
+    <span class="k">new</span> <span class="n">SecondCollection</span> <span class="p">{</span><span class="n">FirstProperty</span> <span class="p">=</span> <span class="s">&quot;Third&quot;</span><span class="p">,</span> <span class="n">SecondProperty</span> <span class="p">=</span> <span class="m">3</span> <span class="p">,</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;III&quot;</span><span class="p">},</span>
+    <span class="k">new</span> <span class="n">SecondCollection</span> <span class="p">{</span><span class="n">FirstProperty</span> <span class="p">=</span> <span class="s">&quot;Fourth&quot;</span><span class="p">,</span> <span class="n">SecondProperty</span> <span class="p">=</span> <span class="m">4</span> <span class="p">,</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;IV&quot;</span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">secondCollection</span><span class="p">.</span><span class="n">InsertMany</span><span class="p">(</span><span class="n">secondCollections</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="util-methods">
+<h3>Util methods<a class="headerlink" href="#util-methods" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span> public void PrintResult&lt;TResult&gt;(IEnumerable&lt;TResult&gt; results, Func&lt;TResult,string&gt; output){
+        Console.WriteLine($&quot;Result Count: {results.Count()}&quot;);
+        results.ToList().ForEach(res =&gt; Console.WriteLine(output(res)));
+   
+    public void PrintResult(IEnumerable&lt;FirstCollection&gt; results) =&gt; PrintResult(results, result =&gt; $&quot;FirstProperty: {result.FirstProperty}, SecondProperty: {result.SecondPropert    ;
+    public void PrintResult(IEnumerable&lt;string&gt; results) =&gt; PrintResult(results, result =&gt; $&quot;Name: {result}&quot;);
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-queries">
+<h2>The queries<a class="headerlink" href="#the-queries" title="Permalink to this headline">¶</a></h2>
+<p>We’ll use two queries as base, first one Simple query with just a composed filter and the last one is Aggregation query with a simple filter and an aggregation with two collections. That queries will used for exemplify complexity and readability each expression construction technic.</p>
+<p>explain each query:</p>
+<ol class="simple">
+<li><p>The <strong>Simple query</strong>: Filter <em><strong>FirstCollection</strong></em> by property <code class="docutils literal notranslate"><span class="pre">FirstProperty</span></code> not equals <em><strong>‘First’</strong></em> and the property <code class="docutils literal notranslate"><span class="pre">SecondProperty</span></code> in 1,2 an</p></li>
+</ol>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span>    db.firstCollection.find({
+       FirstProperty: {
+            $ne: &quot;First&quot;
+        },
+        SecondProperty:{
+            $in:[1,2,4]
+        }
+
+    })
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>The <strong>Aggragate query</strong>: Aggragate the  <em><strong>FirstCollection</strong></em> with <em><strong>SecondCollection</strong></em> by <code class="docutils literal notranslate"><span class="pre">FirstProperty</span></code> and filter <em><strong>FirstCollection</strong></em> by property <code class="docutils literal notranslate"><span class="pre">FirstProperty</span></code> not equals <em><strong>‘First’</strong></em>, selecting only ***SecondColle</p></li>
+</ol>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span>    db.firstCollection.aggragate([
+        {
+            $match: {
+                FirstProperty: {
+                    $ne: &quot;First&quot;
+                }
+   
+                   }, {
+            $lookup: {
+                from: &#39;secondCollection&#39;,
+                localField: &#39;SecondProperty&#39;,
+                foreignField: &#39;SecondProperty&#39;,
+                as: &#39;seconds&#39;
+
+        }
+        }
+    ])
+</pre></div>
+</div>
+<div class="section" id="using-filters-builder">
+<h3>Using <em><strong>Filters</strong></em> Builder<a class="headerlink" href="#using-filters-builder" title="Permalink to this headline">¶</a></h3>
+<p><em><strong>Reference:</strong></em></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.mongodb.com/blog/post/quick-start-c-and-mongodb--read-operations">Mongo DB Blog</a></p></li>
+</ul>
+<div class="section" id="the-simple-query">
+<h4>The Simple Query<a class="headerlink" href="#the-simple-query" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;{</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">collectionInFilter</span> <span class="p">=</span> <span class="n">Builders</span><span class="p">&lt;</span><span class="n">FirstCollection</span><span class="p">&gt;.</span><span class="n">Filter</span><span class="p">.</span><span class="n">In</span><span class="p">(</span><span class="n">collect</span> <span class="p">=&gt;</span> <span class="n">collect</span><span class="p">.</span><span class="n">SecondProperty</span><span class="p">,</span><span class="n">numbers</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">collectionEqFilter</span> <span class="p">=</span> <span class="n">Builders</span><span class="p">&lt;</span><span class="n">FirstCollection</span><span class="p">&gt;.</span><span class="n">Filter</span><span class="p">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">collect</span> <span class="p">=&gt;</span> <span class="n">collect</span><span class="p">.</span><span class="n">FirstProperty</span><span class="p">,</span><span class="s">&quot;First&quot;</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">collectionNotInFilter</span> <span class="p">=</span> <span class="n">Builders</span><span class="p">&lt;</span><span class="n">FirstCollection</span><span class="p">&gt;.</span><span class="n">Filter</span><span class="p">.</span><span class="n">Not</span><span class="p">(</span><span class="n">collectionEqFilter</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">collectionAndFilter</span> <span class="p">=</span> <span class="n">Builders</span><span class="p">&lt;</span><span class="n">FirstCollection</span><span class="p">&gt;.</span><span class="n">Filter</span><span class="p">.</span><span class="n">And</span><span class="p">(</span><span class="n">collectionInFilter</span><span class="p">,</span><span class="n">collectionNotInFilter</span><span class="p">);</span>
+
+<span class="kt">var</span> <span class="n">findFilterResult</span> <span class="p">=</span> <span class="n">firstCollection</span><span class="p">.</span><span class="n">FindSync</span><span class="p">(</span><span class="n">collectionAndFilter</span><span class="p">).</span><span class="n">ToList</span><span class="p">();</span>
+
+<span class="n">PrintResult</span><span class="p">(</span><span class="n">findFilterResult</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-aggregate-query">
+<h4>The Aggregate Query<a class="headerlink" href="#the-aggregate-query" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;{</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">collectionEqFilter</span> <span class="p">=</span> <span class="n">Builders</span><span class="p">&lt;</span><span class="n">FirstCollection</span><span class="p">&gt;.</span><span class="n">Filter</span><span class="p">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">collect</span> <span class="p">=&gt;</span> <span class="n">collect</span><span class="p">.</span><span class="n">FirstProperty</span><span class="p">,</span><span class="s">&quot;First&quot;</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">collectionNotInFilter</span> <span class="p">=</span> <span class="n">Builders</span><span class="p">&lt;</span><span class="n">FirstCollection</span><span class="p">&gt;.</span><span class="n">Filter</span><span class="p">.</span><span class="n">Not</span><span class="p">(</span><span class="n">collectionEqFilter</span><span class="p">);</span>
+
+
+<span class="kt">var</span> <span class="n">findFilterResult</span> <span class="p">=</span> <span class="n">firstCollection</span><span class="p">.</span><span class="n">Aggregate</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">Match</span><span class="p">(</span><span class="n">collectionNotInFilter</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">Lookup</span><span class="p">(</span>
+        <span class="n">foreignCollection</span><span class="p">:</span> <span class="n">secondCollection</span><span class="p">,</span>
+        <span class="n">first</span> <span class="p">=&gt;</span> <span class="n">first</span><span class="p">.</span><span class="n">SecondProperty</span><span class="p">,</span>
+        <span class="n">second</span> <span class="p">=&gt;</span> <span class="n">second</span><span class="p">.</span><span class="n">SecondProperty</span><span class="p">,</span>
+        <span class="n">@as</span> <span class="p">:</span> <span class="p">(</span><span class="n">FirstCollection</span> <span class="n">first</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">first</span><span class="p">.</span><span class="n">SecondCollections</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">Project</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="p">{</span><span class="n">Names</span> <span class="p">=</span> <span class="n">x</span><span class="p">.</span><span class="n">SecondCollections</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">second</span> <span class="p">=&gt;</span> <span class="n">second</span><span class="p">.</span><span class="n">Name</span><span class="p">)})</span>
+    <span class="p">.</span><span class="n">ToList</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">SelectMany</span><span class="p">(</span><span class="n">project</span> <span class="p">=&gt;</span> <span class="n">project</span><span class="p">.</span><span class="n">Names</span><span class="p">);</span>
+
+<span class="n">PrintResult</span><span class="p">(</span><span class="n">findFilterResult</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-method-based-linq">
+<h3>Using Method based LINQ<a class="headerlink" href="#using-method-based-linq" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="explanning">
+<h4>Explanning<a class="headerlink" href="#explanning" title="Permalink to this headline">¶</a></h4>
+<p>Using a <strong>Fluent interface</strong>, <strong>Method based LINQ</strong> has closest expression <strong>MongoDB</strong> regular queries than <strong>Query based LINQ</strong> principally by use of Lambda expressions (<strong>Higher order functions</strong>) to filter’s logic.The combination between Lambda expressions and Fluent interface result is code verbosity and code noise but easy to understanding for C# developers.
+MongoDB offers others methods to query, so is possible to using Lambda expressions to simple queries without use LINQ. Look below an example of likeness between <strong>Method based LINQ</strong>, <strong>MongoDB</strong> regular queries and <strong>MongoBD Driver</strong> methods:</p>
+<ul class="simple">
+<li><p><strong>MongoDB:</strong></p></li>
+</ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>    <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span>
+        <span class="nx">propertyA</span><span class="o">:</span><span class="mf">1</span><span class="p">,</span>
+        <span class="nx">propertyB</span><span class="o">:</span><span class="p">{</span><span class="nx">$ne</span><span class="o">:</span><span class="s2">&quot;VALUE&quot;</span><span class="p">}</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>LINQ:</strong></p></li>
+</ul>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span>    <span class="n">collection</span><span class="p">.</span><span class="n">AsQueryable</span><span class="p">()</span>
+        <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">collection</span> <span class="p">=&gt;</span> 
+            <span class="n">collection</span><span class="p">.</span><span class="n">PropertyA</span> <span class="p">==</span> <span class="m">1</span> 
+            <span class="p">&amp;&amp;</span> <span class="n">collection</span><span class="p">.</span><span class="n">PropertyB</span> <span class="p">!=</span> <span class="s">&quot;VALUE&quot;</span>
+            <span class="p">)</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>MongoDB Driver:</strong></p></li>
+</ul>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span>    <span class="n">collection</span>
+        <span class="p">.</span><span class="n">FindSync</span><span class="p">(</span><span class="n">collection</span> <span class="p">=&gt;</span> 
+            <span class="n">collection</span><span class="p">.</span><span class="n">PropertyA</span> <span class="p">==</span> <span class="m">1</span> 
+            <span class="p">&amp;&amp;</span> <span class="n">collection</span><span class="p">.</span><span class="n">PropertyB</span> <span class="p">!=</span> <span class="s">&quot;VALUE&quot;</span>
+            <span class="p">)</span>
+        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>Contextualizing:</strong></p>
+<ul class="simple">
+<li><p><strong>Fluent interface</strong>: Is a chainig of methods that return a same Type.</p></li>
+<li><p><strong>Higher order function</strong>: Basically is a use of a Function as parameter of another function.</p></li>
+</ul>
+<p><em><strong>Reference</strong></em></p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://mongodb.github.io/mongo-csharp-driver/2.7/reference/driver/crud/linq/">Mongo driver Doc LINQ</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Fluent_interface#:~:text=In%20software%20engineering%2C%20a%20fluent,Eric%20Evans%20and%20Martin%20Fowler.">Fluent interface</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Higher-order_function">Higher order function</a></p></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h4>The Simple Query<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;{</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">fluentResult</span> <span class="p">=</span> <span class="n">firstCollection</span><span class="p">.</span><span class="n">AsQueryable</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">collect</span> <span class="p">=&gt;</span> 
+        <span class="p">!</span><span class="n">collect</span><span class="p">.</span><span class="n">FirstProperty</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="s">&quot;First&quot;</span><span class="p">)</span>
+        <span class="p">&amp;&amp;</span> <span class="n">numbers</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">collect</span><span class="p">.</span><span class="n">SecondProperty</span><span class="p">))</span>
+    <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+<span class="n">PrintResult</span><span class="p">(</span><span class="n">fluentResult</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When has a simple query all power and expressivity of <strong>Method based LINQ</strong> is shown with few lines. But MongoDB driver already have a method to simple queries <code class="docutils literal notranslate"><span class="pre">FindSync</span></code> and <code class="docutils literal notranslate"><span class="pre">FindAsync</span></code>, so <strong>Method based LINQ</strong> is necessary in this situation? 🤔</p>
+</div>
+<div class="section" id="id2">
+<h4>The Aggregate Query<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;{</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">fluentResult</span> <span class="p">=</span> <span class="n">firstCollection</span><span class="p">.</span><span class="n">AsQueryable</span><span class="p">()</span>
+    <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">collect</span> <span class="p">=&gt;</span> <span class="p">!</span><span class="n">collect</span><span class="p">.</span><span class="n">FirstProperty</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="s">&quot;First&quot;</span><span class="p">))</span>
+    <span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="n">secondCollection</span><span class="p">.</span><span class="n">AsQueryable</span><span class="p">(),</span>
+        <span class="n">first</span> <span class="p">=&gt;</span> <span class="n">first</span><span class="p">.</span><span class="n">SecondProperty</span><span class="p">,</span>
+        <span class="n">second</span> <span class="p">=&gt;</span> <span class="n">second</span><span class="p">.</span><span class="n">SecondProperty</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="n">second</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">second</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">second</span> <span class="p">=&gt;</span> <span class="n">second</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+
+<span class="n">PrintResult</span><span class="p">(</span><span class="n">fluentResult</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-query-based-mongo-driver-linq">
+<h3>Using (Query based) <em><strong>Mongo driver</strong></em> LINQ<a class="headerlink" href="#using-query-based-mongo-driver-linq" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>Explanning<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>Expressive, With a familiar syntax and noiseless than <strong>C#</strong>, Query based sintaxe LINQ use SQL syntax like to create a better code readability.<br />
+The query construction and syntax have little differences between LINQ and SQL, to create an alias for example is used the statement <code class="docutils literal notranslate"><span class="pre">from</span></code> following the alias name and the statement <code class="docutils literal notranslate"><span class="pre">in</span></code> is used as collection’s pointer, not the statement <code class="docutils literal notranslate"><span class="pre">from</span></code> as SQL language. Another good example is the order of query expression construction, in SQL the properties selection come first than filter, but in LINQ first is created an alias, obligatory to access an object in collection, after the filter is created and finally the object selection.</p>
+<p>Simple Query example:</p>
+<ul class="simple">
+<li><p><strong>SQL:</strong></p></li>
+</ul>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>    <span class="k">SELECT</span> <span class="o">*</span> 
+        <span class="k">FROM</span> <span class="n">COLLECTION</span> <span class="k">AS</span> <span class="n">COLL</span> 
+        <span class="k">WHERE</span> <span class="n">COLL</span><span class="p">.</span><span class="n">PROPERTY</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>LINQ:</strong></p></li>
+</ul>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span>    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">from</span> <span class="n">coll</span> <span class="k">in</span> <span class="n">collection</span>
+                <span class="k">where</span> <span class="n">coll</span><span class="p">.</span><span class="n">Property</span> <span class="p">==</span> <span class="m">1</span>
+                <span class="k">select</span> <span class="n">coll</span>
+</pre></div>
+</div>
+<p><strong>Contextualizing:</strong></p>
+<ul class="simple">
+<li><p><strong>DSL</strong>: <strong>D</strong>omain <strong>S</strong>pecific <strong>L</strong>anguage is a higher level language optimized to solve specific problems, can used as standalone language or integrated in another programing languages.</p></li>
+<li><p><strong>Declarative Programming</strong>: A programming paradigm or programming style, describe the problem solution without implementations details like <strong>SQL</strong> language.</p></li>
+</ul>
+<p><strong>References:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://getpocket.com/redirect?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDeclarative_programming">Declarative programming</a></p></li>
+<li><p><a class="reference external" href="https://www.jetbrains.com/mps/concepts/domain-specific-languages/">Domain-Specific Languages</a></p></li>
+<li><p><a class="reference external" href="http://mongodb.github.io/mongo-csharp-driver/2.7/reference/driver/crud/linq/">Mongo driver Doc LINQ</a></p></li>
+<li><p><a class="reference external" href="https://app.getpocket.com/read/652237004">LINQ as DSL</a></p></li>
+<li><p><a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq">Query Syntax and Method Syntax in LINQ</a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id4">
+<h4>The Simple Query<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;{</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">dlsResult</span> <span class="p">=</span> <span class="k">from</span> <span class="n">collect</span> <span class="k">in</span> <span class="n">firstCollection</span><span class="p">.</span><span class="n">AsQueryable</span><span class="p">()</span>
+                <span class="k">where</span> <span class="n">collect</span><span class="p">.</span><span class="n">FirstProperty</span> <span class="p">!=</span> <span class="s">&quot;First&quot;</span>
+                     <span class="p">&amp;&amp;</span> <span class="n">numbers</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">collect</span><span class="p">.</span><span class="n">SecondProperty</span><span class="p">)</span>
+                <span class="k">select</span> <span class="n">collect</span><span class="p">;</span>
+
+<span class="n">PrintResult</span><span class="p">(</span><span class="n">dlsResult</span><span class="p">.</span><span class="n">ToList</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here the expression is more verbosity than <strong>Method based LINQ</strong> because the alias obligatory and code’s readability was impaired by C# boolean operators <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">!</span></code>, removing that little issues is easy to undestand the expression.<br />
+That make me think, is good a choice use <strong>Query based LINQ</strong> to simple queries or is better use <strong>Method based LINQ</strong> or <strong>MongoDB Driver</strong> methods? 🤔</p>
+</div>
+<div class="section" id="id5">
+<h4>The Aggregate Query<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;{</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">};</span>
+
+<span class="kt">var</span> <span class="n">dlsResult</span> <span class="p">=</span> <span class="k">from</span> <span class="n">second</span> <span class="k">in</span> <span class="n">secondCollection</span><span class="p">.</span><span class="n">AsQueryable</span><span class="p">()</span>
+                <span class="k">join</span> <span class="n">first</span> <span class="k">in</span> <span class="n">firstCollection</span><span class="p">.</span><span class="n">AsQueryable</span><span class="p">()</span>
+                    <span class="k">on</span> <span class="n">second</span><span class="p">.</span><span class="n">SecondProperty</span> <span class="k">equals</span> <span class="n">first</span><span class="p">.</span><span class="n">SecondProperty</span>
+                <span class="k">where</span> <span class="n">first</span><span class="p">.</span><span class="n">FirstProperty</span> <span class="p">!=</span> <span class="s">&quot;First&quot;</span>
+                <span class="k">orderby</span> <span class="n">first</span><span class="p">.</span><span class="n">SecondProperty</span>
+                <span class="k">select</span> <span class="n">second</span><span class="p">.</span><span class="n">Name</span><span class="p">;</span>
+
+<span class="n">PrintResult</span><span class="p">(</span><span class="n">dlsResult</span><span class="p">.</span><span class="n">ToList</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The big deal of <strong>Query based LINQ</strong>, an aggregation query.<br />
+Using a <strong>SQL</strong> like code style give a better readability principally because the use of <code class="docutils literal notranslate"><span class="pre">join</span></code> as aggregate statement followed of <code class="docutils literal notranslate"><span class="pre">on</span></code> statement to relate properties. Different than <strong>Method based LINQ</strong>, a <strong>Query based LINQ</strong> expression the relation statement and filter statement are made together at end make it better organized, in other words the expression can made at once.</p>
+<p>Look below the same query with <strong>SQL</strong>:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>    <span class="k">SELECT</span> <span class="k">SECOND</span><span class="p">.</span><span class="n">NAME</span> 
+    <span class="k">FROM</span> <span class="n">FIRSTCOLLECTION</span> <span class="k">AS</span> <span class="k">FIRST</span>
+    <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">SECONDCOLLECTION</span> <span class="k">AS</span> <span class="k">SECOND</span>
+        <span class="k">ON</span> <span class="k">FIRST</span><span class="p">.</span><span class="n">SECONDPROPERTY</span> <span class="o">=</span> <span class="k">SECOND</span><span class="p">.</span><span class="n">SECONDPROPERTY</span>
+    <span class="k">WHERE</span> <span class="k">FIRST</span><span class="p">.</span><span class="n">FIRSTPROPERTY</span> <span class="o">&lt;&gt;</span> <span class="s1">&#39;First&#39;</span>
+    <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">FIRST</span><span class="p">.</span><span class="n">SECONDPROPERTY</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: ".net-csharp"
+        },
+        kernelOptions: {
+            kernelName: ".net-csharp",
+            path: "./notebooks/experiences"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = '.net-csharp'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../lambda-saga/currying.html" title="previous page">Lambda Saga - Currying</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Nathan Branco Caracho<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

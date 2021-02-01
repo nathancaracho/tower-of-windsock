@@ -29,9 +29,9 @@ But we has the environment problem yet, so to resolve that problem I used anothe
 
 ## How to use ##
 
-To read the articles you have three possibilities, first  you can click on [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/HEAD) in this doc head, this button will redirect you one folder with all [Jupyter Notebooks][Jupyter Notebooks] files, just chose one and have fun.  Other way is click on [Notebooks Links](#Notebooks-Links), this links will redirect you to  specific notebook My Binder Page.  
-The last way is using [Docker][Docker], just fallow the instructions below:
-1. On project directory root run the command `docker-compose up`.
+To read the articles you have three possibilities, first  you can click on [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nathancaracho/tower-of-windsock/HEAD) in this doc head, this button will redirect you one folder with all [Jupyter Notebooks][Jupyter Notebooks] files, just chose one and have fun.  
+    The last way is using [Docker][Docker], just fallow the instructions below:
+1. On project directory root run the command `docker-compose up local-notebooks`.
 
 ***And just that...*** 
 Now a link you be generated after image build, click on link and enjoy it. 

@@ -13,5 +13,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./notebooks:/notebooks
+      - ./development/settings/:/home/.jupyter/lab/user-settings
     ports:
       - "8888:8888" 

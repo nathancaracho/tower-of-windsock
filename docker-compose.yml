@@ -1,12 +1,12 @@
 version: "3.5"
 services:
   build-page:
-    build:
-      context: ./build
-      dockerfile: Dockerfile
+    image: jupyter/base-notebook:latest
     volumes:
-      - ./:/src
-    command: bash -c "cd .. && jupyter-book build src"
+      - ./:/~/src
+    working_dir: /~
+    command: bash -c "pip install jupyter-book && jupyter-book build src"
+
   local-notebooks:
     container_name: local-notebooks
     build:

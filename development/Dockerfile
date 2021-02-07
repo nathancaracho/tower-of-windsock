@@ -51,7 +51,10 @@ RUN dotnet_sdk_version=3.1.301 \
     # Trigger first run experience by running arbitrary cmd
     && dotnet help
 
+## extentions 
 RUN pip install JLDracula
+RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker
+# end
 
 # Install lastest build from master branch of Microsoft.DotNet.Interactive from myget
 RUN dotnet tool install -g Microsoft.dotnet-interactive

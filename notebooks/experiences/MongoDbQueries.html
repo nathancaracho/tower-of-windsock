@@ -279,8 +279,8 @@
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#util-methods">
-     Util methods
+    <a class="reference internal nav-link" href="#until-methods">
+     Until methods
     </a>
    </li>
   </ul>
@@ -347,17 +347,17 @@
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id3">
-       Explanning
+      <a class="reference internal nav-link" href="#explaining">
+       Explaining
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id4">
+      <a class="reference internal nav-link" href="#id3">
        The Simple Query
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
+      <a class="reference internal nav-link" href="#id4">
        The Aggregate Query
       </a>
      </li>
@@ -497,8 +497,8 @@ docker run -d -p 27017-27017:27017-27017 mongo
 </div>
 </div>
 </div>
-<div class="section" id="util-methods">
-<h3>Util methods<a class="headerlink" href="#util-methods" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="until-methods">
+<h3>Until methods<a class="headerlink" href="#until-methods" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span> public void PrintResult&lt;TResult&gt;(IEnumerable&lt;TResult&gt; results, Func&lt;TResult,string&gt; output){
@@ -515,7 +515,7 @@ docker run -d -p 27017-27017:27017-27017 mongo
 </div>
 <div class="section" id="the-queries">
 <h2>The queries<a class="headerlink" href="#the-queries" title="Permalink to this headline">¶</a></h2>
-<p>We’ll use two queries as base, first one Simple query with just a composed filter and the last one is Aggregation query with a simple filter and an aggregation with two collections. That queries will used for exemplify complexity and readability each expression construction technic.</p>
+<p>We’ll use two queries as base, first one Simple query with just a composed filter and the last one is Aggregation query with a simple filter and an aggregation with two collections. That queries will used for exemplify complexity and readability each expression construction.</p>
 <p>explain each query:</p>
 <ol class="simple">
 <li><p>The <strong>Simple query</strong>: Filter <em><strong>FirstCollection</strong></em> by property <code class="docutils literal notranslate"><span class="pre">FirstProperty</span></code> not equals <em><strong>‘First’</strong></em> and the property <code class="docutils literal notranslate"><span class="pre">SecondProperty</span></code> in 1,2 an</p></li>
@@ -532,9 +532,9 @@ docker run -d -p 27017-27017:27017-27017 mongo
 </pre></div>
 </div>
 <ol class="simple">
-<li><p>The <strong>Aggragate query</strong>: Aggragate the  <em><strong>FirstCollection</strong></em> with <em><strong>SecondCollection</strong></em> by <code class="docutils literal notranslate"><span class="pre">FirstProperty</span></code> and filter <em><strong>FirstCollection</strong></em> by property <code class="docutils literal notranslate"><span class="pre">FirstProperty</span></code> not equals <em><strong>‘First’</strong></em>, selecting only ***SecondColle</p></li>
+<li><p>The <strong>Aggregate query</strong>: Aggregate the  <em><strong>FirstCollection</strong></em> with <em><strong>SecondCollection</strong></em> by <code class="docutils literal notranslate"><span class="pre">FirstProperty</span></code> and filter <em><strong>FirstCollection</strong></em> by property <code class="docutils literal notranslate"><span class="pre">FirstProperty</span></code> not equals <em><strong>‘First’</strong></em>, selecting only ***SecondColle</p></li>
 </ol>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span>    db.firstCollection.aggragate([
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span>    db.firstCollection.aggregate([
         {
             $match: {
                 FirstProperty: {
@@ -645,7 +645,7 @@ MongoDB offers others methods to query, so is possible to using Lambda expressio
 </div>
 <p><strong>Contextualizing:</strong></p>
 <ul class="simple">
-<li><p><strong>Fluent interface</strong>: Is a chainig of methods that return a same Type.</p></li>
+<li><p><strong>Fluent interface</strong>: Is a chain of methods that return a same Type.</p></li>
 <li><p><strong>Higher order function</strong>: Basically is a use of a Function as parameter of another function.</p></li>
 </ul>
 <p><em><strong>Reference</strong></em></p>
@@ -672,7 +672,7 @@ MongoDB offers others methods to query, so is possible to using Lambda expressio
 </div>
 </div>
 </div>
-<p>When has a simple query all power and expressivity of <strong>Method based LINQ</strong> is shown with few lines. But MongoDB driver already have a method to simple queries <code class="docutils literal notranslate"><span class="pre">FindSync</span></code> and <code class="docutils literal notranslate"><span class="pre">FindAsync</span></code>, so <strong>Method based LINQ</strong> is necessary in this situation? 🤔</p>
+<p>When has a simple query all power and expressive of <strong>Method based LINQ</strong> is shown with few lines. But MongoDB driver already have a method to simple queries <code class="docutils literal notranslate"><span class="pre">FindSync</span></code> and <code class="docutils literal notranslate"><span class="pre">FindAsync</span></code>, so <strong>Method based LINQ</strong> is necessary in this situation? 🤔</p>
 </div>
 <div class="section" id="id2">
 <h4>The Aggregate Query<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
@@ -698,9 +698,9 @@ MongoDB offers others methods to query, so is possible to using Lambda expressio
 </div>
 <div class="section" id="using-query-based-mongo-driver-linq">
 <h3>Using (Query based) <em><strong>Mongo driver</strong></em> LINQ<a class="headerlink" href="#using-query-based-mongo-driver-linq" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id3">
-<h4>Explanning<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
-<p>Expressive, With a familiar syntax and noiseless than <strong>C#</strong>, Query based sintaxe LINQ use SQL syntax like to create a better code readability.<br />
+<div class="section" id="explaining">
+<h4>Explaining<a class="headerlink" href="#explaining" title="Permalink to this headline">¶</a></h4>
+<p>Expressive, With a familiar syntax and noiseless than <strong>C#</strong>, Query based syntax LINQ use SQL syntax like to create a better code readability.<br />
 The query construction and syntax have little differences between LINQ and SQL, to create an alias for example is used the statement <code class="docutils literal notranslate"><span class="pre">from</span></code> following the alias name and the statement <code class="docutils literal notranslate"><span class="pre">in</span></code> is used as collection’s pointer, not the statement <code class="docutils literal notranslate"><span class="pre">from</span></code> as SQL language. Another good example is the order of query expression construction, in SQL the properties selection come first than filter, but in LINQ first is created an alias, obligatory to access an object in collection, after the filter is created and finally the object selection.</p>
 <p>Simple Query example:</p>
 <ul class="simple">
@@ -721,7 +721,7 @@ The query construction and syntax have little differences between LINQ and SQL, 
 </div>
 <p><strong>Contextualizing:</strong></p>
 <ul class="simple">
-<li><p><strong>DSL</strong>: <strong>D</strong>omain <strong>S</strong>pecific <strong>L</strong>anguage is a higher level language optimized to solve specific problems, can used as standalone language or integrated in another programing languages.</p></li>
+<li><p><strong>DSL</strong>: <strong>D</strong>omain <strong>S</strong>pecific <strong>L</strong>anguage is a higher level language optimized to solve specific problems, can used as standalone language or integrated in another programming languages.</p></li>
 <li><p><strong>Declarative Programming</strong>: A programming paradigm or programming style, describe the problem solution without implementations details like <strong>SQL</strong> language.</p></li>
 </ul>
 <p><strong>References:</strong></p>
@@ -734,8 +734,8 @@ The query construction and syntax have little differences between LINQ and SQL, 
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="id4">
-<h4>The Simple Query<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id3">
+<h4>The Simple Query<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;{</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">};</span>
@@ -750,11 +750,11 @@ The query construction and syntax have little differences between LINQ and SQL, 
 </div>
 </div>
 </div>
-<p>Here the expression is more verbosity than <strong>Method based LINQ</strong> because the alias obligatory and code’s readability was impaired by C# boolean operators <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">!</span></code>, removing that little issues is easy to undestand the expression.<br />
+<p>Here the expression is more verbosity than <strong>Method based LINQ</strong> because the alias obligatory and code’s readability was impaired by C# boolean operators <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">!</span></code>, removing that little issues is easy to understand the expression.<br />
 That make me think, is good a choice use <strong>Query based LINQ</strong> to simple queries or is better use <strong>Method based LINQ</strong> or <strong>MongoDB Driver</strong> methods? 🤔</p>
 </div>
-<div class="section" id="id5">
-<h4>The Aggregate Query<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id4">
+<h4>The Aggregate Query<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;{</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">2</span><span class="p">};</span>

@@ -3,10 +3,9 @@ FROM jupyter/base-notebook:latest
 # Install .NET CLI dependencies
 
 ARG NB_USER=jovyan
-ARG NB_UID=1000
 ENV USER ${NB_USER}
-ENV NB_UID ${NB_UID}
-ENV HOME /home/${NB_USER}
+ENV HOME /home
+
 
 WORKDIR ${HOME}
 
@@ -52,7 +51,10 @@ RUN dotnet_sdk_version=3.1.301 \
     # Trigger first run experience by running arbitrary cmd
     && dotnet help
 
-# Copy notebooks
+## extentions 
+RUN pip install JLDracula
+RUN jupyter labextension install @ijmbarr/jupyterlab_spellchecker
+# end
 
 COPY ./notebooks/ ${HOME}/notebooks/
 
@@ -61,10 +63,8 @@ USER ${USER}
 
 #Install nteract 
 RUN pip install nteract_on_jupyter
-
 # Install lastest build from master branch of Microsoft.DotNet.Interactive from myget
 RUN dotnet tool install -g Microsoft.dotnet-interactive
-
 #latest stable from nuget.org
 #RUN dotnet tool install -g Microsoft.dotnet-interactive --add-source "https://api.nuget.org/v3/index.json"
 
@@ -79,3 +79,4 @@ ENV DOTNET_TRY_CLI_TELEMETRY_OPTOUT=false
 
 # Set root to notebooks
 WORKDIR ${HOME}/notebooks/
+

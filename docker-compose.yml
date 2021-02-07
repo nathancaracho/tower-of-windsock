@@ -9,10 +9,11 @@ services:
   local-notebooks:
     container_name: local-notebooks
     build:
-      context: ./development
+      context: ./
       dockerfile: Dockerfile
     volumes:
       - ./notebooks:/notebooks
       - ./development/settings/:/home/.jupyter/lab/user-settings
     ports:
       - "8888:8888" 
+    entrypoint: jupyter lab --ip=0.0.0.0  --allow-root  --notebook-dir=/notebooks/
